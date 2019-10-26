@@ -6,10 +6,10 @@ import Output from './components/Output';
 class App extends React.Component {
   render() {
     const buttons = [
-      '1',      '2', '3', '+',
-      '4',      '5', '6', '-',
-      '7',      '8', '9', '*',
-      'Clear',  '0', '=', '/'
+      '1',      '2',      '3',      '+',
+      '4',      '5',      '6',      '-',
+      '7',      '8',      '9',      '*',
+      'Clear',  '0',      '=',      '/',
     ];
     return (
       <div className="App">
