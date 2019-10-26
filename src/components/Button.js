@@ -9,7 +9,7 @@ class Button extends React.Component {
   render() {
     const { char } = this.props;
     return (
-      <button onClick={this.appendToOutput.bind(this)}>
+      <button className="button" onClick={this.appendToOutput.bind(this)}>
         {char}
       </button>
     );

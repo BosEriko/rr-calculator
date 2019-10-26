@@ -4,7 +4,7 @@ import './Output.css';
 class Output extends React.Component {
   render() {
     return (
-      <textarea className="output" defaultValue="0"/>
+      <textarea rows="1" className="output" defaultValue="0"/>
     );
   }
 }

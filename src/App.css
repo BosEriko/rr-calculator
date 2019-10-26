@@ -4,4 +4,11 @@
   margin: 50vh auto 0;
   transform: translateY(-50%);
   grid-template-columns: repeat(4, 1fr);
+  background-color: #585858;
+  padding: 50px 30px;
+  border-radius: 10px;
+  border-width: 0 5px 5px 0;
+  border-style: solid;
+  border-color: rgba(0,0,0,.25);
+  grid-gap: 15px;
 }
