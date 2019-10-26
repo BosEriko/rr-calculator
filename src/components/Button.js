@@ -5,11 +5,14 @@ import { connect } from 'react-redux';
 import { updateCurrentData } from '../redux';
 
 class Button extends React.Component {
+  buttonClick(event) {
+    event.preventDefault();
+    this.props.updateCurrentData(this.props.char);
+  }
   render() {
-    const { char } = this.props;
     return (
-      <button className="button" onClick={() => this.props.updateCurrentData(char)}>
-        {char}
+      <button className="button" onClick={this.buttonClick.bind(this)}>
+        {this.props.char}
       </button>
     );
   }
