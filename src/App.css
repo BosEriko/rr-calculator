@@ -1,6 +1,7 @@
 .calculator {
   display: grid;
   width: 500px;
-  margin: 0 auto;
+  margin: 50vh auto 0;
+  transform: translateY(-50%);
   grid-template-columns: repeat(4, 1fr);
 }
