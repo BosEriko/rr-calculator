@@ -7,7 +7,10 @@ import { updateCurrentData } from '../redux';
 class Button extends React.Component {
   buttonClick(event) {
     event.preventDefault();
-    this.props.updateCurrentData(this.props.char);
+    this.props.updateCurrentData({
+      char: this.props.char,
+      type: this.props.type
+    });
   }
   render() {
     return (

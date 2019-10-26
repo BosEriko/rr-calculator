@@ -16,7 +16,7 @@ export const updateCurrentData = currentData => ({
 export const currentData = (state = 0, action) => {
   switch (action.type) {
     case UPDATE_CURRENT_DATA:
-      return action.currentData
+      return action.currentData.char
     default:
       return state;
   }
