@@ -6,14 +6,14 @@ import { connect } from 'react-redux';
 class Output extends React.Component {
   render() {
     return (
-      <textarea rows="1" className="output" defaultValue={this.props.operation} />
+      <textarea rows="1" className="output" defaultValue={this.props.currentData} />
     );
   }
 }
 
 // Container
 const mapStateToProps = state => ({
-  operation: state.operation
+  currentData: state.currentData
 });
 
 const mapDispatchToProps = {

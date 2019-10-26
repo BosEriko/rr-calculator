@@ -4,26 +4,26 @@ import {
 } from 'redux';
 
 // Constants
-const UPDATE_OPERATION = 'UPDATE_OPERATION'
+const UPDATE_CURRENT_DATA = 'UPDATE_CURRENT_DATA'
 
 // Actions
-export const updateOperation = operation => ({
-  type: UPDATE_OPERATION,
-  operation
+export const updateCurrentData = currentData => ({
+  type: UPDATE_CURRENT_DATA,
+  currentData
 });
 
 // Reducers
-export const operation = (state = [], action) => {
+export const currentData = (state = 0, action) => {
   switch (action.type) {
-    case UPDATE_OPERATION:
-      return action.operation
+    case UPDATE_CURRENT_DATA:
+      return action.currentData
     default:
       return state;
   }
 };
 
 export const reducers = combineReducers({
-  operation
+  currentData
 });
 
 // Store
