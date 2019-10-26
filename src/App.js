@@ -13,9 +13,9 @@ class App extends React.Component {
     ];
     return (
       <div className="App">
-        <div class="calculator">
+        <div className="calculator">
           <Output />
-          { buttons.map(char => <Button char={char} />) }
+          { buttons.map((char, key) => <Button char={char} key={key} />) }
         </div>
       </div>
     );
