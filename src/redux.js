@@ -3,6 +3,9 @@ import {
   createStore,
 } from 'redux';
 
+// Deep Clone
+const deepClone = data => JSON.parse(JSON.stringify(data));
+
 // Constants
 const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER'
 const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC'
@@ -29,19 +32,23 @@ export const currentData = (state = [], action) => {
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
       if (isNaN(state[state.length - 1])) {
-        state.push(action.operationNumber.char);
-        return state;
+        let clonedState = deepClone(state);
+        clonedState.push(action.operationNumber.char)
+        return state = clonedState;
       } else {
-        state[state.length - 1] += action.operationNumber.char;
-        return state;
+        let clonedState = deepClone(state);
+        clonedState[clonedState.length - 1] += action.operationNumber.char;
+        return state = clonedState;
       }
     case ADD_OPERATION_ARITHMETIC:
       if (isNaN(state[state.length - 1])) {
-        state[state.length - 1] = action.operationArithmetic.char;
-        return state;
+        let clonedState = deepClone(state);
+        clonedState[clonedState.length - 1] = action.operationArithmetic.char;
+        return state = clonedState;
       } else {
-        state.push(action.operationArithmetic.char);
-        return state;
+        let clonedState = deepClone(state);
+        clonedState.push(action.operationArithmetic.char);
+        return state = clonedState;
       }
     case CLEAR_OPERATION:
       return state = [];
