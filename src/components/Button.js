@@ -64,7 +64,7 @@ class Button extends React.Component {
   }
   render() {
     return (
-      <button className="button" onClick={this.buttonClick.bind(this)}>
+      <button className={this.props.darkMode ? "button dark" : "button"} onClick={this.buttonClick.bind(this)}>
         {this.props.char}
       </button>
     );
@@ -72,7 +72,9 @@ class Button extends React.Component {
 }
 
 // Container
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  darkMode: state.currentData.darkMode,
+});
 
 const mapDispatchToProps = {
   addOperationNumber,

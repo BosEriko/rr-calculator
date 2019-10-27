@@ -22,12 +22,12 @@ class App extends React.Component {
     ]);
     const buttons = this.props.scientificMode ? scientificButtons : normalButtons;
     return (
-      <div className="App">
+      <div className={this.props.darkMode ? "App dark" : "App"}>
         <div className="toggle-buttons">
           <button onClick={() => this.props.toggleScientificMode()}>Scientific Mode</button>
           <button onClick={() => this.props.toggleDarkMode()}>Dark Mode</button>
         </div>
-        <div className="calculator">
+        <div className={this.props.darkMode ? "calculator dark" : "calculator"}>
           <Output />
           <span className="sign-mode-text">{this.props.signMode ? 'Inputs are now negative.' : ''}</span>
           { buttons.map((button, key) => <Button char={button.char} type={button.type} key={key} />) }
