@@ -10,6 +10,9 @@ const deepClone = data => JSON.parse(JSON.stringify(data));
 const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER'
 const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC'
 const CLEAR_OPERATION           = 'CLEAR_OPERATION'
+const SIGN_OPERATION            = 'SIGN_OPERATION'
+const SQUARE_OPERATION          = 'SQUARE_OPERATION'
+const ROOT_OPERATION            = 'ROOT_OPERATION'
 const GET_OPERATION_RESULT      = 'GET_OPERATION_RESULT'
 
 // Actions
@@ -31,6 +34,21 @@ export const clearOperation = operation => ({
 export const getOperationResult = operationResult => ({
   type: GET_OPERATION_RESULT,
   operationResult
+});
+
+export const signOperation = operation => ({
+  type: SIGN_OPERATION,
+  operation
+});
+
+export const squareOperation = operation => ({
+  type: SQUARE_OPERATION,
+  operation
+});
+
+export const rootOperation = operation => ({
+  type: ROOT_OPERATION,
+  operation
 });
 
 // Reducers
@@ -68,6 +86,12 @@ export const currentData = (state = [], action) => {
       return state = clonedState;
     case CLEAR_OPERATION:
       return state = [];
+    case SIGN_OPERATION:
+      return state;
+    case SQUARE_OPERATION:
+      return state;
+    case ROOT_OPERATION:
+      return state;
     default:
       return state;
   }

@@ -6,6 +6,9 @@ import {
   addOperationNumber,
   addOperationArithmetic,
   getOperationResult,
+  signOperation,
+  squareOperation,
+  rootOperation,
   clearOperation
 } from '../redux';
 
@@ -37,6 +40,24 @@ class Button extends React.Component {
           type: this.props.type
         });
         break;
+      case "sign":
+        this.props.signOperation({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      case "square":
+        this.props.squareOperation({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      case "root":
+        this.props.rootOperation({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
       default:
         console.log("Something went wrong");
     }
@@ -57,6 +78,9 @@ const mapDispatchToProps = {
   addOperationNumber,
   addOperationArithmetic,
   getOperationResult,
+  signOperation,
+  squareOperation,
+  rootOperation,
   clearOperation
 };
 
