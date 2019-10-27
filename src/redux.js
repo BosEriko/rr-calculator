@@ -7,13 +7,15 @@ import {
 const deepClone = data => JSON.parse(JSON.stringify(data));
 
 // Constants
-const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER'
-const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC'
-const CLEAR_OPERATION           = 'CLEAR_OPERATION'
-const SIGN_OPERATION            = 'SIGN_OPERATION'
-const SQUARE_OPERATION          = 'SQUARE_OPERATION'
-const ROOT_OPERATION            = 'ROOT_OPERATION'
-const GET_OPERATION_RESULT      = 'GET_OPERATION_RESULT'
+const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER';
+const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC';
+const CLEAR_OPERATION           = 'CLEAR_OPERATION';
+const SIGN_OPERATION            = 'SIGN_OPERATION';
+const SQUARE_OPERATION          = 'SQUARE_OPERATION';
+const ROOT_OPERATION            = 'ROOT_OPERATION';
+const GET_OPERATION_RESULT      = 'GET_OPERATION_RESULT';
+const TOGGLE_DARK_MODE          = 'TOGGLE_DARK_MODE';
+const TOGGLE_SCIENTIFIC_MODE    = 'TOGGLE_SCIENTIFIC_MODE';
 
 // Actions
 export const addOperationNumber = operationNumber => ({
@@ -51,11 +53,22 @@ export const rootOperation = operation => ({
   operation
 });
 
+export const toggleDarkMode = darkMode => ({
+  type: TOGGLE_DARK_MODE,
+  darkMode
+});
+
+export const toggleScientificMode = scientificMode => ({
+  type: TOGGLE_SCIENTIFIC_MODE,
+  scientificMode
+});
+
 // Reducers
-export const currentData = (state = { output: [], signMode: false }, action) => {
+export const currentData = (state = { output: [], signMode: false, darkMode: false, scientificMode: false }, action) => {
+
   let clonedState = deepClone(state);
   let inputIsNaN  = isNaN(state.output[state.output.length - 1]);
-  // eslint-disable-next-line
+
   let evaluate = data => {
     if (state.signMode) {
       data.output[0] *= -1;
@@ -67,6 +80,7 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
       return eval(data.output.join(" ")).toString()
     }
   }
+
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
       if (inputIsNaN)
@@ -74,6 +88,7 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
       else
         clonedState.output[clonedState.output.length - 1] += action.operationNumber.char;
       return state = clonedState;
+
     case ADD_OPERATION_ARITHMETIC:
       if (inputIsNaN) {
         clonedState.output[clonedState.output.length - 1] = action.operationArithmetic.char;
@@ -84,23 +99,39 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
         clonedState.output.push(action.operationArithmetic.char);
       }
       return state = clonedState;
+
     case GET_OPERATION_RESULT:
       if (clonedState.output.length >= 3){
         clonedState.output = [ evaluate(clonedState) ];
       }
       clonedState.output = [ clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)] ];
       return state = clonedState;
+
     case CLEAR_OPERATION:
-      return state = { output: [], signMode: false };
+      clonedState.output = [];
+      clonedState.signMode = false;
+      return state = clonedState;
+
     case SIGN_OPERATION:
       clonedState.signMode = !clonedState.signMode
       return state = clonedState;
+
     case SQUARE_OPERATION:
       clonedState.output = [ Math.pow(clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)], 2) ];
       return state = clonedState;
+
     case ROOT_OPERATION:
       clonedState.output = [ Math.sqrt(clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)]) ];
       return state = clonedState;
+
+    case TOGGLE_DARK_MODE:
+      clonedState.darkMode = !clonedState.darkMode
+      return state = clonedState;
+
+    case TOGGLE_SCIENTIFIC_MODE:
+      clonedState.scientificMode = !clonedState.scientificMode
+      return state = clonedState;
+
     default:
       return state;
   }

@@ -4,6 +4,10 @@ import Button from './components/Button';
 import Output from './components/Output';
 
 import { connect } from 'react-redux';
+import { 
+  toggleDarkMode,
+  toggleScientificMode
+} from './redux';
 
 class App extends React.Component {
   render() {
@@ -17,8 +21,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="toggle-buttons">
-          <button>Scientific Mode</button>
-          <button>Dark Mode</button>
+          <button onClick={() => this.props.toggleScientificMode()}>Scientific Mode</button>
+          <button onClick={() => this.props.toggleDarkMode()}>Dark Mode</button>
         </div>
         <div className="calculator">
           <Output />
@@ -32,10 +36,15 @@ class App extends React.Component {
 
 // Container
 const mapStateToProps = state => ({
-  signMode: state.currentData.signMode
+  signMode: state.currentData.signMode,
+  darkMode: state.currentData.darkMode,
+  scientificMode: state.currentData.scientificMode
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  toggleDarkMode,
+  toggleScientificMode
+};
 
 const AppContainer = connect(
   mapStateToProps,
