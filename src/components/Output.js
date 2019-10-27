@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class Output extends React.Component {
   render() {
     return (
-      <textarea rows="1" className="output" defaultValue={this.props.currentData} />
+      <textarea disabled rows="1" className="output" defaultValue={this.props.currentData} />
     );
   }
 }
