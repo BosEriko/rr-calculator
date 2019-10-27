@@ -16,6 +16,10 @@ class App extends React.Component {
     ];
     return (
       <div className="App">
+        <div className="toggle-buttons">
+          <button>Scientific Mode</button>
+          <button>Dark Mode</button>
+        </div>
         <div className="calculator">
           <Output />
           <span className="sign-mode-text">{this.props.signMode ? 'Inputs are now negative.' : ''}</span>
