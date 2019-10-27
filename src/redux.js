@@ -10,6 +10,7 @@ const deepClone = data => JSON.parse(JSON.stringify(data));
 const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER'
 const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC'
 const CLEAR_OPERATION           = 'CLEAR_OPERATION'
+const GET_OPERATION_RESULT      = 'GET_OPERATION_RESULT'
 
 // Actions
 export const addOperationNumber = operationNumber => ({
@@ -27,29 +28,42 @@ export const clearOperation = operation => ({
   operation
 });
 
+export const getOperationResult = operationResult => ({
+  type: GET_OPERATION_RESULT,
+  operationResult
+});
+
 // Reducers
 export const currentData = (state = [], action) => {
+  let clonedState = deepClone(state);
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
       if (isNaN(state[state.length - 1])) {
-        let clonedState = deepClone(state);
         clonedState.push(action.operationNumber.char)
-        return state = clonedState;
       } else {
-        let clonedState = deepClone(state);
         clonedState[clonedState.length - 1] += action.operationNumber.char;
-        return state = clonedState;
       }
+      return state = clonedState;
     case ADD_OPERATION_ARITHMETIC:
       if (isNaN(state[state.length - 1])) {
-        let clonedState = deepClone(state);
         clonedState[clonedState.length - 1] = action.operationArithmetic.char;
-        return state = clonedState;
       } else {
-        let clonedState = deepClone(state);
+        if (clonedState.length >= 3){
+          clonedState = [eval(clonedState.join("")).toString()];
+        }
         clonedState.push(action.operationArithmetic.char);
-        return state = clonedState;
       }
+      return state = clonedState;
+    case GET_OPERATION_RESULT:
+      if (clonedState.length >= 3){
+        clonedState = [eval(clonedState.join("")).toString()];
+      }
+      if (isNaN(state[state.length - 1])) {
+        clonedState = [ clonedState[clonedState.length - 2] ];
+      } else {
+        clonedState = [ clonedState[clonedState.length - 1] ];
+      }
+      return state = clonedState;
     case CLEAR_OPERATION:
       return state = [];
     default:

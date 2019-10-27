@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { 
   addOperationNumber,
   addOperationArithmetic,
+  getOperationResult,
   clearOperation
 } from '../redux';
 
@@ -20,6 +21,12 @@ class Button extends React.Component {
         break;
       case "arithmetic":
         this.props.addOperationArithmetic({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      case "result":
+        this.props.getOperationResult({
           char: this.props.char,
           type: this.props.type
         });
@@ -49,6 +56,7 @@ const mapStateToProps = state => ({});
 const mapDispatchToProps = {
   addOperationNumber,
   addOperationArithmetic,
+  getOperationResult,
   clearOperation
 };
 
