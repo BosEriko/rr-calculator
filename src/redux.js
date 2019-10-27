@@ -25,14 +25,14 @@ export const clearOperation = operation => ({
 });
 
 // Reducers
-export const currentData = (state = [0], action) => {
+export const currentData = (state = [], action) => {
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
       return state += action.operationNumber.char;
     case ADD_OPERATION_ARITHMETIC:
       return state += action.operationArithmetic.char;
     case CLEAR_OPERATION:
-      return state += action.operation.char;
+      return state = [];
     default:
       return state;
   }
