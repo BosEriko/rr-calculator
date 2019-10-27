@@ -96,9 +96,11 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
       clonedState.signMode = !clonedState.signMode
       return state = clonedState;
     case SQUARE_OPERATION:
-      return state;
+      clonedState.output = [ Math.pow(clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)], 2) ];
+      return state = clonedState;
     case ROOT_OPERATION:
-      return state;
+      clonedState.output = [ Math.sqrt(clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)]) ];
+      return state = clonedState;
     default:
       return state;
   }
