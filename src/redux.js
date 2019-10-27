@@ -4,19 +4,35 @@ import {
 } from 'redux';
 
 // Constants
-const UPDATE_CURRENT_DATA = 'UPDATE_CURRENT_DATA'
+const ADD_OPERATION_NUMBER      = 'ADD_OPERATION_NUMBER'
+const ADD_OPERATION_ARITHMETIC  = 'ADD_OPERATION_ARITHMETIC'
+const CLEAR_OPERATION           = 'CLEAR_OPERATION'
 
 // Actions
-export const updateCurrentData = currentData => ({
-  type: UPDATE_CURRENT_DATA,
-  currentData
+export const addOperationNumber = operationNumber => ({
+  type: ADD_OPERATION_NUMBER,
+  operationNumber
+});
+
+export const addOperationArithmetic = operationArithmetic => ({
+  type: ADD_OPERATION_ARITHMETIC,
+  operationArithmetic
+});
+
+export const clearOperation = operation => ({
+  type: CLEAR_OPERATION,
+  operation
 });
 
 // Reducers
-export const currentData = (state = 0, action) => {
+export const currentData = (state = [0], action) => {
   switch (action.type) {
-    case UPDATE_CURRENT_DATA:
-      return action.currentData.char
+    case ADD_OPERATION_NUMBER:
+      return state += action.operationNumber.char;
+    case ADD_OPERATION_ARITHMETIC:
+      return state += action.operationArithmetic.char;
+    case CLEAR_OPERATION:
+      return state += action.operation.char;
     default:
       return state;
   }

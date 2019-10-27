@@ -2,15 +2,37 @@ import React from 'react';
 import './Button.css';
 
 import { connect } from 'react-redux';
-import { updateCurrentData } from '../redux';
+import { 
+  addOperationNumber,
+  addOperationArithmetic,
+  clearOperation
+} from '../redux';
 
 class Button extends React.Component {
   buttonClick(event) {
     event.preventDefault();
-    this.props.updateCurrentData({
-      char: this.props.char,
-      type: this.props.type
-    });
+    switch (this.props.type) {
+      case "integer":
+        this.props.addOperationNumber({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      case "arithmetic":
+        this.props.addOperationArithmetic({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      case "clear":
+        this.props.clearOperation({
+          char: this.props.char,
+          type: this.props.type
+        });
+        break;
+      default:
+        console.log("Something went wrong");
+    }
   }
   render() {
     return (
@@ -27,7 +49,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  updateCurrentData
+  addOperationNumber,
+  addOperationArithmetic,
+  clearOperation
 };
 
 const ButtonContainer = connect(
