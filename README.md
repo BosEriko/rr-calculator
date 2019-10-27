@@ -1,3 +1,3 @@
 # React Redux Calculator
 
-Just run `yarn start` to run the project.
+Just run `yarn install && yarn start` to run the project.
