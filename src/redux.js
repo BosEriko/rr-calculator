@@ -55,6 +55,18 @@ export const rootOperation = operation => ({
 export const currentData = (state = { output: [], signMode: false }, action) => {
   let clonedState = deepClone(state);
   let inputIsNaN  = isNaN(state.output[state.output.length - 1]);
+  // eslint-disable-next-line
+  let evaluate = data => {
+    if (state.signMode) {
+      data.output[0] *= -1;
+      data.output[2] *= -1;
+      // eslint-disable-next-line
+      return eval(data.output.join(" ")).toString()
+    } else {
+      // eslint-disable-next-line
+      return eval(data.output.join(" ")).toString()
+    }
+  }
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
       if (inputIsNaN)
@@ -67,16 +79,14 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
         clonedState.output[clonedState.output.length - 1] = action.operationArithmetic.char;
       } else {
         if (clonedState.output.length >= 3){
-          // eslint-disable-next-line
-          clonedState.output = [eval(clonedState.output.join("")).toString()];
+          clonedState.output = [ evaluate(clonedState) ];
         }
         clonedState.output.push(action.operationArithmetic.char);
       }
       return state = clonedState;
     case GET_OPERATION_RESULT:
       if (clonedState.output.length >= 3){
-        // eslint-disable-next-line
-        clonedState.output = [eval(clonedState.output.join("")).toString()];
+        clonedState.output = [ evaluate(clonedState) ];
       }
       clonedState.output = [ clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)] ];
       return state = clonedState;
