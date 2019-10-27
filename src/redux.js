@@ -49,6 +49,7 @@ export const currentData = (state = [], action) => {
         clonedState[clonedState.length - 1] = action.operationArithmetic.char;
       } else {
         if (clonedState.length >= 3){
+          // eslint-disable-next-line
           clonedState = [eval(clonedState.join("")).toString()];
         }
         clonedState.push(action.operationArithmetic.char);
@@ -56,6 +57,7 @@ export const currentData = (state = [], action) => {
       return state = clonedState;
     case GET_OPERATION_RESULT:
       if (clonedState.length >= 3){
+        // eslint-disable-next-line
         clonedState = [eval(clonedState.join("")).toString()];
       }
       if (isNaN(state[state.length - 1])) {
