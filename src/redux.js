@@ -52,40 +52,36 @@ export const rootOperation = operation => ({
 });
 
 // Reducers
-export const currentData = (state = [], action) => {
+export const currentData = (state = { output: [], signMode: false }, action) => {
   let clonedState = deepClone(state);
+  let inputIsNaN  = isNaN(state.output[state.output.length - 1]);
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
-      if (isNaN(state[state.length - 1])) {
-        clonedState.push(action.operationNumber.char)
-      } else {
-        clonedState[clonedState.length - 1] += action.operationNumber.char;
-      }
+      if (inputIsNaN)
+        clonedState.output.push(action.operationNumber.char)
+      else
+        clonedState.output[clonedState.output.length - 1] += action.operationNumber.char;
       return state = clonedState;
     case ADD_OPERATION_ARITHMETIC:
-      if (isNaN(state[state.length - 1])) {
-        clonedState[clonedState.length - 1] = action.operationArithmetic.char;
+      if (inputIsNaN) {
+        clonedState.output[clonedState.output.length - 1] = action.operationArithmetic.char;
       } else {
-        if (clonedState.length >= 3){
+        if (clonedState.output.length >= 3){
           // eslint-disable-next-line
-          clonedState = [eval(clonedState.join("")).toString()];
+          clonedState.output = [eval(clonedState.output.join("")).toString()];
         }
-        clonedState.push(action.operationArithmetic.char);
+        clonedState.output.push(action.operationArithmetic.char);
       }
       return state = clonedState;
     case GET_OPERATION_RESULT:
-      if (clonedState.length >= 3){
+      if (clonedState.output.length >= 3){
         // eslint-disable-next-line
-        clonedState = [eval(clonedState.join("")).toString()];
+        clonedState.output = [eval(clonedState.output.join("")).toString()];
       }
-      if (isNaN(state[state.length - 1])) {
-        clonedState = [ clonedState[clonedState.length - 2] ];
-      } else {
-        clonedState = [ clonedState[clonedState.length - 1] ];
-      }
+      clonedState.output = [ clonedState.output[clonedState.output.length - (inputIsNaN ? 2 : 1)] ];
       return state = clonedState;
     case CLEAR_OPERATION:
-      return state = [];
+      return state = { output: [], signMode: false };
     case SIGN_OPERATION:
       return state;
     case SQUARE_OPERATION:
