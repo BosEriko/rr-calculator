@@ -83,7 +83,8 @@ export const currentData = (state = { output: [], signMode: false }, action) => 
     case CLEAR_OPERATION:
       return state = { output: [], signMode: false };
     case SIGN_OPERATION:
-      return state;
+      clonedState.signMode = !clonedState.signMode
+      return state = clonedState;
     case SQUARE_OPERATION:
       return state;
     case ROOT_OPERATION:
