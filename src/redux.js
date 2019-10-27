@@ -28,9 +28,21 @@ export const clearOperation = operation => ({
 export const currentData = (state = [], action) => {
   switch (action.type) {
     case ADD_OPERATION_NUMBER:
-      return state += action.operationNumber.char;
+      if (isNaN(state[state.length - 1])) {
+        state.push(action.operationNumber.char);
+        return state;
+      } else {
+        state[state.length - 1] += action.operationNumber.char;
+        return state;
+      }
     case ADD_OPERATION_ARITHMETIC:
-      return state += action.operationArithmetic.char;
+      if (isNaN(state[state.length - 1])) {
+        state[state.length - 1] = action.operationArithmetic.char;
+        return state;
+      } else {
+        state.push(action.operationArithmetic.char);
+        return state;
+      }
     case CLEAR_OPERATION:
       return state = [];
     default:

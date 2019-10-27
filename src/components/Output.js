@@ -16,9 +16,7 @@ const mapStateToProps = state => ({
   currentData: state.currentData
 });
 
-const mapDispatchToProps = {
-  // Empty
-};
+const mapDispatchToProps = {};
 
 const OutputContainer = connect(
   mapStateToProps,

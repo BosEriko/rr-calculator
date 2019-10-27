@@ -44,9 +44,7 @@ class Button extends React.Component {
 }
 
 // Container
-const mapStateToProps = state => ({
-  // Empty
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
   addOperationNumber,
