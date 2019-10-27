@@ -3,6 +3,8 @@ import './App.css';
 import Button from './components/Button';
 import Output from './components/Output';
 
+import { connect } from 'react-redux';
+
 class App extends React.Component {
   render() {
     const buttons = [
@@ -16,6 +18,7 @@ class App extends React.Component {
       <div className="App">
         <div className="calculator">
           <Output />
+          <span className="sign-mode-text">{this.props.signMode ? 'Inputs are now negative.' : ''}</span>
           { buttons.map((button, key) => <Button char={button.char} type={button.type} key={key} />) }
         </div>
       </div>
@@ -23,4 +26,16 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// Container
+const mapStateToProps = state => ({
+  signMode: state.currentData.signMode
+});
+
+const mapDispatchToProps = {};
+
+const AppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+export default AppContainer;
