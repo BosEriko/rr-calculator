@@ -24,8 +24,12 @@ class App extends React.Component {
     return (
       <div className={this.props.darkMode ? "App dark" : "App"}>
         <div className="toggle-buttons">
-          <button onClick={() => this.props.toggleScientificMode()}>Scientific Mode</button>
-          <button onClick={() => this.props.toggleDarkMode()}>Dark Mode</button>
+          <button onClick={() => this.props.toggleScientificMode()}>
+            { this.props.scientificMode ? "Normal Calculator" : "Scientific Calculator" }
+          </button>
+          <button onClick={() => this.props.toggleDarkMode()}>
+            { this.props.darkMode ?  "Light Mode" : "Dark Mode" }
+          </button>
         </div>
         <div className={this.props.darkMode ? "calculator dark" : "calculator"}>
           <Output />
